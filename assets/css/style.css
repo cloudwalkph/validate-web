@@ -1,0 +1,70 @@
+@font-face {
+    font-family: mRegular;
+    src: url(fonts/MONTSERRAT-REGULAR.OTF);
+}
+
+@font-face {
+    font-family: mLight;
+    src: url(fonts/MONTSERRAT-LIGHT.OTF);
+}
+
+@font-face {
+    font-family: mBold;
+    src: url(fonts/MONTSERRAT-BOLD.OTF);
+}
+
+html body.login{
+	background:url('../img/BG.jpg');
+	background-repeat: no-repeat;
+    background-size: cover;
+	color:white;
+	font-family:mRegular;
+}
+
+h3.heading{
+	font-family:mBold;
+	margin-bottom: -4px;
+	text-align: center;
+	font-size: 25px;
+}
+
+p.slogan{
+	text-align: center;
+	margin:0;
+}
+
+p.slogan small{
+	font-family:mLight;
+	margin-bottom: 0px;
+    font-size: 11px;
+    opacity: 0.8;
+	color:white;
+	text-align: center;
+}
+
+html body.login .md-form input:focus{
+	border-color: #E5AA5C;
+    outline: 0;
+	border-bottom: 1px solid #E5AA5C;
+    box-shadow: 0 1px 0 0 #E5AA5C;
+}
+
+html body.login .md-form input{
+	color:#ffffff;
+}
+
+html body.login .md-form input:focus+label{
+	color:#E5AA5C;
+}
+
+html body.login .md-form label{
+	color:#ffffff;
+}
+
+#toast-container .toast .toast-message{
+	font-size:15px;
+}
+
+.css-class-to-highlight{
+	background-color: #ff0;
+}
