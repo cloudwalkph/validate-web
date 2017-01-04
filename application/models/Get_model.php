@@ -93,35 +93,166 @@ class Get_model extends CI_Model
     function grabEmployeeById( $a ){
         $str = '';
         $query = $this->db->get_where('tblemployee', array('_id' => $a));
-        foreach ( $query->result() as $row ){
-            $str .= '
-                <label class="assignedAccounts">'.$row->emp_lname.', '.$row->emp_fname.' '.$row->emp_mname.'</label> <br>
-            ';
+        if( $query->num_rows() > 0){
+            foreach ( $query->result() as $row ){
+                $str .= '
+                    <label class="assignedAccounts">'.$row->emp_lname.', '.$row->emp_fname.' '.$row->emp_mname.'</label> <br>
+                ';
+            }
+        }else{
+            $queryTls = $this->db->get_where('tblteamleader', array('_id' => $a));
+            if( $queryTls->num_rows() > 0){
+                foreach ( $queryTls->result() as $rowTls ){
+                    $str .= '
+                    <label class="assignedTls">'.$rowTls->tfname.' '.$rowTls->tlname.'</label> <br>
+                ';
+                }
+            }else{
+                $queryNegos = $this->db->get_where('tblteamleader', array('_id' => $a));
+                foreach ( $queryNegos->result() as $rowNegos ){
+                    $str .= '
+                    <label class="assignedNegos">'.$rowNegos->nfname.' '.$rowNegos->nlname.'</label> <br>
+                ';
+                }
+            }
         }
         return $str;
     }
 
     function grabRaterAndRateeById( $a ){
+        $arrEventType = array();
         $str = '<div class="row">';
         $queryRater = $this->db->get_where('tblemployee',array('_id'=>$a['rater']));
         $arrRater = $queryRater->result_array();
 
-        if(isset($arrRater)){
+        if(isset($arrRater[0])){
+//            print_r($arrRater[0]['emp_lname']);return false;
             $str .= '
                     <div class="col-sm-6">
-                        <label>'.$arrRater[0]['emp_lname'].', '.$arrRater[0]['emp_fname'].' '.$arrRater[0]['emp_mname'].'</label>
+                        <label>'.$arrRater[0]['emp_lname'].', '.$arrRater[0]['emp_fname'].'</label>
                     </div>
                 ';
+
             $queryRatee = $this->db->get_where('tblemployee',array('_id'=>$a['ratee']));
             $arrRatee = $queryRatee->result_array();
-            $str .= '
+
+            if( $queryRatee->num_rows() > 0 ){
+                $str .= '
                     <div class="col-sm-6">
                         <label>'.$arrRatee[0]['emp_lname'].', '.$arrRatee[0]['emp_fname'].' '.$arrRatee[0]['emp_mname'].'</label>
                     </div>
                 ';
+            }else{
+                $queryTls = $this->db->get_where('tblteamleader',array('_id'=>$a['ratee']));
+                $arrTls = $queryTls->result_array();
+                if( $queryTls->num_rows() > 0 ){
+                    $str .= '
+                    <div class="col-sm-6">
+                        <label>'.$arrTls[0]['tfname'].' '.$arrTls[0]['tlname'].'</label>
+                    </div>
+                ';
+                }else{
+                    $queryNegos = $this->db->get_where('tblnegotiator',array('_id'=>$a['ratee']));
+                    $arrNegos = $queryNegos->result_array();
+                    $str .= '
+                    <div class="col-sm-6">
+                        <label>'.$arrNegos[0]['nfname'].' '.$arrNegos[0]['nlname'].'</label>
+                    </div>
+                ';
+                }
+            }
+        }else{
+            /*if TL is rater*/
+
+            $queryTls = $this->db->get_where('tblteamleader',array('_id'=>$a['rater']));
+            $arrTls = $queryTls->result_array();
+
+            if(isset($arrTls[0])){
+//            print_r($arrRater[0]['emp_lname']);return false;
+                $str .= '
+                    <div class="col-sm-6">
+                        <label>'.$arrTls[0]['tfname'].' '.$arrTls[0]['tlname'].'</label>
+                        
+                    </div>
+                ';
+
+                $queryRatee = $this->db->get_where('tblemployee',array('_id'=>$a['ratee']));
+                $arrRatee = $queryRatee->result_array();
+
+                if( $queryRatee->num_rows() > 0 ){
+                    $str .= '
+                    <div class="col-sm-6">
+                        <label>'.$arrRatee[0]['emp_lname'].', '.$arrRatee[0]['emp_fname'].'</label>
+                    </div>
+                ';
+                }else{
+                    $queryRater = $this->db->get_where('tblemployee',array('_id'=>$a['ratee']));
+                    $arrRater = $queryRater->result_array();
+                    if( $arrRater->num_rows() > 0 ){
+                        $str .= '
+                    <div class="col-sm-6">
+                        <label>'.$arrRater[0]['emp_lname'].', '.$arrRater[0]['emp_fname'].'</label>
+                    </div>
+                ';
+                    }else{
+                        $queryNegos = $this->db->get_where('tblnegotiator',array('_id'=>$a['ratee']));
+                        $arrNegos = $queryNegos->result_array();
+                        $str .= '
+                    <div class="col-sm-6">
+                        <label>'.$arrNegos[0]['nfname'].' '.$arrNegos[0]['nlname'].'</label>
+                    </div>
+                ';
+                    }
+                }
+            }else{
+                /*Nego*/
+                $queryNegos = $this->db->get_where('tblnegotiator',array('_id'=>$a['ratee']));
+                $arrNegos = $queryNegos->result_array();
+
+                if(isset($arrTls[0])){
+                    $str .= '
+                    <div class="col-sm-6">
+                        <label>'.$arrNegos[0]['nfname'].' '.$arrNegos[0]['nlname'].'</label>
+                    </div>
+                ';
+
+                    $queryRatee = $this->db->get_where('tblemployee',array('_id'=>$a['ratee']));
+                    $arrRatee = $queryRatee->result_array();
+
+                    if( $queryRatee->num_rows() > 0 ){
+                        $str .= '
+                    <div class="col-sm-6">
+                        <label>'.$arrRatee[0]['emp_lname'].', '.$arrRatee[0]['emp_fname'].'</label>
+                    </div>
+                ';
+                    }else{
+                        $queryRater = $this->db->get_where('tblemployee',array('_id'=>$a['ratee']));
+                        $arrRater = $queryRater->result_array();
+                        if( $arrRater->num_rows() > 0 ){
+                            $str .= '
+                                <div class="col-sm-6">
+                                    <label>'.$arrRater[0]['emp_lname'].', '.$arrRater[0]['emp_fname'].'</label>
+                                </div>
+                            ';
+                        }else{
+                            $queryTls = $this->db->get_where('tblteamleader',array('_id'=>$a['rater']));
+                            $arrTls = $queryTls->result_array();
+
+                            $str .= '
+                                <div class="col-sm-6">
+                                    <label>'.$arrTls[0]['tfname'].' '.$arrTls[0]['tlname'].'</label>
+                                </div>
+                            ';
+                        }
+                    }
+                }
+            }
         }
         $str .= '</div>';
-        return $str;
+
+        $arrEventType['valStr'] = $str;
+        $arrEventType['typeOfEvent'] = $a['typeOfEvent'];
+        return json_encode($arrEventType);
     }
 
     function getQuestionInfo( $a ){
@@ -134,8 +265,16 @@ class Get_model extends CI_Model
         $query = $this->db->get_where('tblquestions', array('qcat' => $a, 'qtype' => $b));
 //        return json_encode($query->result_array());
         foreach ($query->result() as $rowQuestions){
-            $str_event .= '<option value="'.$rowQuestions->qname.','.$rowQuestions->_id.'" alt="'.$rowQuestions->_id.'">'.$rowQuestions->qname.'</option>';
+            $str_event .= '<option value="'.$rowQuestions->qname.'***'.$rowQuestions->_id.'" alt="'.$rowQuestions->_id.'">'.$rowQuestions->qname.'</option>';
         }
         return $str_event;
+    }
+
+    function getEventDetails($eventId){
+        $arrData = array();
+        $this->db->where( '_id', $eventId );
+        $query = $this->db->get('tblevents');
+        $arrData = $query->result();
+        return json_encode($arrData);
     }
 }

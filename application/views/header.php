@@ -26,7 +26,7 @@
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap-material-datetimepicker.css" />
 
 	<!-- BEGIN SHORTCUT AND TOUCH ICONS -->
-	<link rel="shortcut icon" href="<?php echo base_url(); ?>assets/globals/img/icons/favicon.ico">
+	<link rel="shortcut icon" href="<?php echo base_url(); ?>assets/globals/img/icons/validate.png">
 	<link rel="apple-touch-icon" href="<?php echo base_url(); ?>assets/globals/img/icons/apple-touch-icon.png">
 	<!-- END SHORTCUT AND TOUCH ICONS -->
 	<script src="<?php echo base_url(); ?>assets/globals/plugins/modernizr/modernizr.min.js"></script>

@@ -26,10 +26,10 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3" style="padding-top: 40px;">
-				<img src="<?php echo base_url(); ?>assets/img/logo.png" class="center-block" style="max-width: 132px;margin-bottom: 15px;" />
-				<h3 class="heading h3-responsive center-block">Activations Project Evaluation</h3>
-				<p class="slogan"><small class="text-muted">Let’s help keep the quality of our service to its peak and make</small></p>
-				<p class="slogan" style="margin-top: -6px;"><small class="text-muted">every client satisfied. Please log in to participate.</small></p>
+				<img src="<?php echo base_url(); ?>assets/img/validateLogo.png" class="center-block" style="max-width: 463px;margin-bottom: 0px;" />
+<!--				<h3 class="heading h3-responsive center-block">Activations Project Evaluation</h3>-->
+<!--				<p class="slogan"><small class="text-muted">Let’s help keep the quality of our service to its peak and make</small></p>-->
+<!--				<p class="slogan" style="margin-top: -6px;"><small class="text-muted">every client satisfied. Please log in to participate.</small></p>-->
 			</div>		
 		</div>
 		<div class="row" style="padding-top: 20px;">

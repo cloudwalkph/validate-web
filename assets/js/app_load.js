@@ -421,7 +421,7 @@ function reload_functions() {
             }
 
 
-            $('select#eventType').prop('disabled',true);
+            // $('select#eventType').prop('disabled',true);
             $('input#inp_ProjectName').prop('disabled',true);
             $('input#inp_ActivationsDate').prop('disabled',true);
             $('input#InpEndDate').prop('disabled',true);
@@ -445,7 +445,6 @@ function reload_functions() {
 
     $('#selRater').on('change',function () {
         $.ajax({
-            // url: '../employee/getEmployees',
             url: '../index.php/employee/getEmployees',
             type:'post',
             data: {
@@ -557,7 +556,12 @@ $('#btn-assign-event').on('click', function () {
     // $('#QuestionViewer').prepend(res[0]);
 // });
 
+var questionParse = JSON.parse(sessionStorage.getItem("QuestionsIDs"));
 var checkQuestions = new Array();
+
+if( questionParse != null || questionParse != undefined){
+    checkQuestions = questionParse;
+}
 
 $('#saveProject').on('click', function(e) {
     e.preventDefault();
@@ -566,7 +570,7 @@ $('#saveProject').on('click', function(e) {
     var str = $('select#selQuestions').val();
     var sRater = $('select#selRaterEmp').val();
     var sRatee = $('select#selRateeEmp').val();
-    var res = str.split(",");
+    var res = str.split("***");
     // var cval = $('select#selQuestions').val();
     var cval = eventType+"*"+sRater+"*"+sRatee+"*"+res[1];
 

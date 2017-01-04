@@ -261,6 +261,7 @@ if( $this->input->get('etype') == 'pre' ){
         $.each(FilterQuestions, function (index, value) {
 
             var arrQuestionsVariables = value.split('*');
+//            console.log(arrQuestionsVariables);
 
             loadRaterRatee(arrQuestionsVariables[0],arrQuestionsVariables[1],arrQuestionsVariables[2]);
 
@@ -272,18 +273,21 @@ if( $this->input->get('etype') == 'pre' ){
             url: '../employee/getRaterAndRatee',
             type:'post',
             data: {
+                'typeOfEvent' : typeOfEvent,
                 'rater' : rater,
                 'ratee' : ratee
             },
             success: function(data) {
-                if(typeOfEvent == 'pre'){
-                    $('div#preEventContainer').append(data);
+                var obj = JSON.parse(data);
+                console.log(obj);
+                if(obj.typeOfEvent == 'pre'){
+                    $('div#preEventContainer').append(obj.valStr);
                 }
-                if(typeOfEvent == 'eprop'){
-                    $('div#epropEventContainer').append(data);
+                if(obj.typeOfEvent == 'eprop'){
+                    $('div#epropEventContainer').append(obj.valStr);
                 }
-                if(typeOfEvent == 'post'){
-                    $('div#postEventContainer').append(data);
+                if(obj.typeOfEvent == 'post'){
+                    $('div#postEventContainer').append(obj.valStr);
                 }
             }
         });
@@ -311,7 +315,9 @@ if( $this->input->get('etype') == 'pre' ){
                      QuestionsIDs: sessionStorage.getItem('QuestionsIDs')
                  },
                  success:  function(response){
-                     console.log(response);
+                     localStorage.clear();
+                     sessionStorage.clear();
+//                     console.log(response);
 //                     document.getElementById("questionForm").reset();
 //                     sessionStorage.setItem("QuestionsIDs", JSON.stringify(applyQuestions));
 //                     $('#QuestionViewer').empty();

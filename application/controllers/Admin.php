@@ -175,6 +175,7 @@ class Admin extends CI_Controller {
                 $r_arr[$key]['qcat'] = $value->qcat;
                 $r_arr[$key]['qtype'] = $value->qtype;
                 $r_arr[$key]['qsub'] = $value->qsub;
+                $r_arr[$key]['assigned_events'] = $value->qsub;
             }
         }
 		print_r(json_encode($r_arr));
@@ -193,6 +194,8 @@ class Admin extends CI_Controller {
 	}
 
 	public function saveRecord(){
+	    echo $_POST['record'];
+	    return false;
 		$data = $_POST['record'];
 		$insert_data = array(
 			'recordarray'	=>	$data

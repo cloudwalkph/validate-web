@@ -125,7 +125,7 @@
                             <?php
 //                            print_r($results);
                             foreach ($results as $rowQuestions){
-                                echo '<option value="'.$rowQuestions->qname.','.$rowQuestions->_id.'" alt="'.$rowQuestions->_id.'">'.$rowQuestions->qname.'</option>';
+                                echo '<option value="'.$rowQuestions->qname.'***'.$rowQuestions->_id.'" alt="'.$rowQuestions->_id.'">'.$rowQuestions->qname.'</option>';
                             }
                             ?>
                         </select>
@@ -171,11 +171,12 @@
         $('input#InpEndDate').val( localStorage.getItem('edate') );
         $('input#inp_JobOrder').val( localStorage.getItem('joname') );
         $('input#inp_InputDate').val( localStorage.getItem('idate') );
-        $('select#eventType').prop('disabled',true);
+//        $('select#eventType').prop('disabled',true);
         $('input#inp_ProjectName').prop('disabled',true);
         $('input#inp_ActivationsDate').prop('disabled',true);
         $('input#InpEndDate').prop('disabled',true);
         $('input#inp_JobOrder').prop('disabled',true);
         $('input#inp_InputDate').prop('disabled',true);
     }
+
 </script>

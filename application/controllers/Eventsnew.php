@@ -18,6 +18,11 @@ class Eventsnew extends CI_Controller {
      * map to /index.php/welcome/<method_name>
      * @see https://codeigniter.com/user_guide/general/urls.html
      */
+    public function __construct() {
+        parent::__construct ();
+        $this->load->model('get_model', 'grab');
+    }
+
     public function index()
     {
         if(!$this->session->userdata('logged_in')){
@@ -498,5 +503,9 @@ class Eventsnew extends CI_Controller {
         }
         echo json_encode($events);
         // echo '{"id":"5","name":"Creamsilk","jo":"jo3333","date":"04\/06\/2016","time":"12:15 AM"}';
+    }
+
+    function eventDetails(){
+        echo $this->grab->getEventDetails($this->input->post('eventId'));
     }
 }

@@ -1,7 +1,9 @@
 <?php 
 	$data['eid'] = $eid;
 	$data['page'] = 'result';
-	$this->load->view("header_result",$data); 
+	$this->load->view("header_result",$data);
+
+//	print_r($result_event);
 ?>
 		
 <div class="row cpreevent" alt="x">
