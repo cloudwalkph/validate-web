@@ -46,5 +46,36 @@ class Update_mod extends CI_Model
         return json_encode($arr_ret);
     }
 
+    function updateProject( $postValues ){
+        $returnArray = [];
+        $returnString = '';
 
+        $data = array(
+            'e_name'         => $postValues['projectName'],
+            'p_date'         => $postValues['newPreEvent'],
+            'e_date'         => $postValues['newEventProper'],
+            'pe_date'        => $postValues['newPostEvent']
+        );
+        $this->db->where( '_id', $postValues['projectId'] );
+        $this->db->update( 'tblevents', $data );
+
+        if( $this->db->affected_rows() > 0 ){
+            $returnString = '
+                <tr id="eventRow'.$postValues['projectId'].'">
+                    <td>'.$postValues['projectName'].'</td>
+                    <td>'.$postValues['jobId'].'</td>
+                    <td>'.$postValues['newPreEvent'].'</td>
+                    <td>'.$postValues['newEventProper'].'</td>
+                    <td>'.$postValues['newPostEvent'].'</td>
+                    <td>
+                        <a href="'.base_url('events/results/event/'.$postValues['projectId']).'" class="btn btn-success btn-rounded btn-ripple"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                        <a href="#" class="btn btn-warning btn-rounded btn-ripple editButtonEvent" alt="'.$postValues['projectId'].'" data-toggle="modal" data-target="#myModal"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                    </td>
+                </tr>
+            ';
+        }
+        $returnArray['affected_rows'] = $this->db->affected_rows();
+        $returnArray['content'] = $returnString;
+        return json_encode($returnArray);
+    }
 }

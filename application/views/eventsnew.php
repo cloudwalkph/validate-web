@@ -11,13 +11,12 @@
             <th>Actions</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody id="tbodyEvents">
 
         <?php
         foreach ( $results as $row ){
-//        echo $row->_id; // column name sa table
             echo '
-                <tr>
+                <tr id="eventRow'.$row->_id.'">
                     <td>'.$row->e_name.'</td>
                     <td>'.$row->e_jo.'</td>
                     <td>'.$row->p_date.'</td>
@@ -53,19 +52,19 @@
                         <input type="text" name="projectName" id="newProjectName" class="form-control" placeholder="Project Name">
                     </div>
                     <div class="md-form">
-                        <input type="text" name="newPreEvent" id="newPreEvent" class="form-control" placeholder="Pre-Event">
+                        <input type="text" name="newPreEvent" id="newPreEvent" class="form-control dateSelector" placeholder="Pre-Event">
                     </div>
                     <div class="md-form">
-                        <input type="text" name="newPreEvent" id="newEventProper" class="form-control" placeholder="Event Proper">
+                        <input type="text" name="newEventProper" id="newEventProper" class="form-control dateSelector" placeholder="Event Proper">
                     </div>
                     <div class="md-form">
-                        <input type="text" name="newPreEvent" id="newPostEvent" class="form-control" placeholder="Post Event">
+                        <input type="text" name="newPostEvent" id="newPostEvent" class="form-control dateSelector" placeholder="Post Event">
                     </div>
                 </div>
                 <!--Footer-->
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button id="updateProject" type="button" class="btn btn-primary">Save changes</button>
                 </div>
                 </form>
             </div>
@@ -88,11 +87,40 @@
             data: { 'eventId' : eventId },
             success: function(result){
                 var obj = JSON.parse(result);
+                sessionStorage.clear();
+                sessionStorage.setItem('projectId', obj[0]._id );
+                sessionStorage.setItem('jobId', obj[0].e_jo );
                 $("input#newProjectName").val(obj[0].e_name);
                 $("input#newPreEvent").val(obj[0].p_date);
                 $("input#newEventProper").val(obj[0].e_date);
                 $("input#newPostEvent").val(obj[0].pe_date);
             }
         });
+    });
+
+    $('#updateProject').on('click', function () {
+        $('#editProject').ajaxForm({
+            type: 'POST',
+            url: 'projects/updateProject',
+            data: {
+                projectId : sessionStorage.getItem('projectId'),
+                jobId : sessionStorage.getItem('jobId')
+            },
+            beforeSubmit: function(arr, jform, option){
+                $('#updateProject').prop('disabled', true);
+            },
+            success:  function(response){
+                if( response == null ){ return false; }
+                var obj = JSON.parse(response);
+                if( obj.affected_rows > 0 ){
+                    toastr.info('Successfully saved!');
+                    $( 'tr#eventRow' + sessionStorage.getItem('projectId') ).replaceWith( obj.content );
+                    $('#myModal').modal('hide');
+                }else{
+                    toastr.info('Fail to save!');
+                }
+                $('#updateProject').prop('disabled', false);
+            }
+        }).submit();
     });
 </script>

@@ -96,4 +96,8 @@ class Projects extends CI_Controller {
         $data['getQuestionInfo'] = $this->getq->getQuestionInfo( $this->input->get('a') );
         $this->load->view('summary', $data);
     }
+
+    function updateProject(){
+        echo $this->ups->updateProject( $this->input->post() );
+    }
 }
