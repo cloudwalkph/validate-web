@@ -72,7 +72,7 @@ class Get_model extends CI_Model
             <option value="'.$row->_id.'">'.$row->tfname.', '.$row->tlname.'</option> 
             ';
             }
-        }else if(['departmentValue']=='Negotiator'){
+        }else if($a['departmentValue']=='Negotiator'){
             $query = $this->db->get('tblnegotiator');
             foreach ( $query->result() as $row ) {
                 $str .= '

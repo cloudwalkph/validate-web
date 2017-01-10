@@ -279,7 +279,6 @@ if( $this->input->get('etype') == 'pre' ){
             },
             success: function(data) {
                 var obj = JSON.parse(data);
-                console.log(obj);
                 if(obj.typeOfEvent == 'pre'){
                     $('div#preEventContainer').append(obj.valStr);
                 }
@@ -308,23 +307,20 @@ if( $this->input->get('etype') == 'pre' ){
 
     $('button#submitSummaryForm').on('click',function(e){
         $('form#summaryForm').ajaxForm({
-                 type: 'POST',
-                 url: '../questions/saveProject',
-                 data: {
-                     localFormData: JSON.stringify(allStorage()),
-                     QuestionsIDs: sessionStorage.getItem('QuestionsIDs')
-                 },
-                 success:  function(response){
+             type: 'POST',
+             url: '../questions/saveProject',
+             data: {
+                 localFormData: JSON.stringify(allStorage()),
+                 QuestionsIDs: sessionStorage.getItem('QuestionsIDs')
+             },
+             success:  function(response){
+                 if( response > 0 ){
                      localStorage.clear();
                      sessionStorage.clear();
-//                     console.log(response);
-//                     document.getElementById("questionForm").reset();
-//                     sessionStorage.setItem("QuestionsIDs", JSON.stringify(applyQuestions));
-//                     $('#QuestionViewer').empty();
-//                     $('#btnSummary').removeAttr('disabled');
-//                     // document.getElementById("btnSummary").href='../projects/summary?a='+response;
-//                     $('#continueEvent').prop('disabled', false);
+                 }else{
+                     toastr.info('fail');
                  }
-             }).submit();
+             }
+         }).submit();
     });
 </script>
