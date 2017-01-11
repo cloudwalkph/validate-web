@@ -268,7 +268,10 @@ if( $this->input->get('etype') == 'pre' ){
         });
     }
 
+    var checker = [];
+
     function loadRaterRatee( typeOfEvent, rater, ratee){
+
         $.ajax({
             url: '../employee/getRaterAndRatee',
             type:'post',
@@ -279,14 +282,22 @@ if( $this->input->get('etype') == 'pre' ){
             },
             success: function(data) {
                 var obj = JSON.parse(data);
-                if(obj.typeOfEvent == 'pre'){
-                    $('div#preEventContainer').append(obj.valStr);
-                }
-                if(obj.typeOfEvent == 'eprop'){
-                    $('div#epropEventContainer').append(obj.valStr);
-                }
-                if(obj.typeOfEvent == 'post'){
-                    $('div#postEventContainer').append(obj.valStr);
+
+                if ($.inArray(obj.tmpStorageForRaterAndRatee, checker) != -1)
+                {
+                    return false;
+                }else{
+                    checker.push(obj.tmpStorageForRaterAndRatee)
+
+                    if(obj.typeOfEvent == 'pre'){
+                        $('div#preEventContainer').append(obj.valStr);
+                    }
+                    if(obj.typeOfEvent == 'eprop'){
+                        $('div#epropEventContainer').append(obj.valStr);
+                    }
+                    if(obj.typeOfEvent == 'post'){
+                        $('div#postEventContainer').append(obj.valStr);
+                    }
                 }
             }
         });

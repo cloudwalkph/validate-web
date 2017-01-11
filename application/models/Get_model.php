@@ -121,6 +121,7 @@ class Get_model extends CI_Model
 
     function grabRaterAndRateeById( $a ){
         $arrEventType = array();
+
         $str = '<div class="row">';
         $queryRater = $this->db->get_where('tblemployee',array('_id'=>$a['rater']));
         $arrRater = $queryRater->result_array();
@@ -251,6 +252,7 @@ class Get_model extends CI_Model
         $str .= '</div>';
 
         $arrEventType['valStr'] = $str;
+        $arrEventType['tmpStorageForRaterAndRatee'] = $a['rater'].$a['ratee'].$a['typeOfEvent'];
         $arrEventType['typeOfEvent'] = $a['typeOfEvent'];
         return json_encode($arrEventType);
     }
