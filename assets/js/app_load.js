@@ -451,6 +451,7 @@ function reload_functions() {
                 'departmentValue' : $(this).val()
             },
             success: function(data) {
+                console.log(data);
                 $('#selRaterEmp').empty();
                 $('#selRaterEmp').append( '<option value="" disabled selected>Select</option>' + data );
             }
@@ -470,6 +471,64 @@ function reload_functions() {
             }
         });
     });
+
+    $('#selRateeEmp').on('change',function () {
+        loadQuestionsByDepartment();
+    });
+
+    function loadQuestionsByDepartment(){
+
+        var selectedRater = $('#selRaterEmp').val();
+        var eventType = $('#eventType').val();
+        var questionTypes = $('#QuestionTypes').val();
+        $.ajax({
+            url: '../questions/getQuestionsByDepartment',
+            type:'post',
+            data: {
+                'selRateeEmp' : $('#selRateeEmp').val(),
+                'selRaterEmp' : selectedRater,
+                'eventType' : eventType,
+                'questionTypes' : $('#QuestionTypes').val(),
+                'selRatee' : $('#selRatee').val()
+            },
+            beforeSend: function (){
+                $('#mySpinner').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                })
+                $('#mySpinner').modal('show');
+
+                if( selectedRater == null || selectedRater == undefined || eventType == null || eventType == undefined || questionTypes == null || questionTypes == undefined ){
+                    return false;
+                }
+            },
+            success: function(data) {
+                var obj = JSON.parse(data);
+
+                $('#QuestionViewer').empty();
+
+                if( data != null || data != undefined ){
+                    $('#QuestionViewer').append( obj.optionString );
+
+                    var jsonObj = JSON.parse(obj.storageValue);
+
+                    $.each(jsonObj, function (index, data) {
+                        if(checkQuestions.indexOf(data) >= 0){
+                            return false;
+                        }else{
+                            checkQuestions.push(data);
+                            sessionStorage.setItem("QuestionsIDs", JSON.stringify(checkQuestions));
+                        }
+                    });
+                }
+
+                setTimeout(function () {
+                    $('#mySpinner').modal('hide');
+                }, 3000);
+
+            }
+        });
+    }
 
     $('#btn_assign_dept').on('click',function () {
         $('#form_dept_assign').ajaxForm({
@@ -509,7 +568,7 @@ function reload_functions() {
                 //
                 // $('#questNum').text( obj.rqid );
                 // $('#q_id').val( obj.rqid );
-                // $('#a_id'    ).val( obj.rqid );
+                // $('#a_id').val( obj.rqid );
                 // $('#e_question').val( obj.question );
                 // $('#tbl_assigned').empty();
                 // $('#tbl_assigned').append( obj.depts );

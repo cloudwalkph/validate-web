@@ -270,6 +270,28 @@ class Get_model extends CI_Model
         return $str_event;
     }
 
+    function QuestionsByDepartment( $filterValues ){
+        $arrReturned = [];
+        $arrStorage = [];
+        $str_event = '';
+        $queryDept = $this->db->get_where('tbldepartments', array('department_name' => $filterValues['selRatee']));
+        $arrDept = $queryDept->result_array();
+
+        if(isset($arrDept[0])){
+            $query = $this->db->get_where('tblquestions', array('qcat' => $filterValues['eventType'], 'qtype' => $filterValues['questionTypes'], 'qdept' => $arrDept[0]['_id']));
+            foreach ($query->result() as $rowQuestions){
+                $str_event .= '<option value="'.$rowQuestions->_id.'">'.$rowQuestions->qname.'</option>';
+                array_push($arrStorage, $filterValues['eventType'].'*'.$filterValues['selRaterEmp'].'*'.$filterValues['selRateeEmp'].'*'.$rowQuestions->_id );
+            }
+        }
+
+//        return json_encode($query->result_array());
+
+        $arrReturned['optionString'] = $str_event;
+        $arrReturned['storageValue'] = json_encode($arrStorage);
+        return json_encode($arrReturned);
+    }
+
     function getEventDetails($eventId){
         $arrData = array();
         $this->db->where( '_id', $eventId );

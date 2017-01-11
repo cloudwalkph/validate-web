@@ -161,6 +161,17 @@
         </div>
 
     </form>
+
+    <div class="modal fade tiny" id="mySpinner" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <!--Content-->
+            <div class="modal-content text-center">
+                Please wait ...
+            </div>
+            <!--/.Content-->
+        </div>
+    </div>
+
 </div>
 <?php $this->load->view('footer'); ?>
 <script>

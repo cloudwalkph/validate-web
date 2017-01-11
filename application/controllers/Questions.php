@@ -87,4 +87,8 @@ class Questions extends CI_Controller {
     function getQuestionByEvent(){
         echo $this->getq->QuestionsByEvent( $this->input->post('etype'), $this->input->post('qtype') );
     }
+
+    function getQuestionsByDepartment(){
+        echo $this->getq->QuestionsByDepartment( $this->input->post() );
+    }
 }
