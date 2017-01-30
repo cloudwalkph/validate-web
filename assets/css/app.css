@@ -1,1 +1,26 @@
 .mgt{ margin-top: 2vh}
+
+a.active{
+    color: #ffffff !important;
+    background-color: #f0ad4e !important;;
+    border-color: #f0ad4e !important;;
+}
+li.active{
+    color: #ffffff !important;
+    background-color: #f0ad4e !important;;
+    border-color: #f0ad4e !important;;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    color: #fff;
+}
+
+.nav-tabs > li.active a:after, .nav-tabs > li.active a:hover:after, .nav-tabs > li.active a:active:after, .nav-tabs > li.active a:focus:after {
+    position: absolute;
+    content: '';
+    border-bottom: none;
+    left: 0;
+    top: 2px;
+    width: 100%;
+    height: 100%;
+}

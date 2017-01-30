@@ -14,27 +14,19 @@
         </thead>
         <tbody id="tbodyEvents">
         <?php
-        foreach ( $results as $row ){
-            $stringClient='';
-            $this->db->where('client_id',$row->client_company_name);
-            $clientQuery = $this->db->get('clients');
-            $rowClient=$clientQuery->result_array();
-//            print_r($rowClient);
-            if(isset($rowClient)){
-                $stringClient=$rowClient[0]['contact_person'];
-            }
+        foreach ( json_decode($results) as $row ){
             echo '
-                <tr id="eventRow'.$row->jo_id.'">
-                    <td><a href="'.base_url('projects?jo='.$row->jo_id).'">'.$row->jo_number.'</a></td>
-                    <td>'.$row->project_name.'</td>
-                    <td>'.$row->project_type.'</td>
-                    <td>'.$stringClient.'</td>
-                    <td>'.$row->brand.'</td>
+                <tr id="eventRow'.$row->jobID.'">
+                    <td><a href="'.base_url('projects?jo='.$row->jobID).'">'.$row->jobNumber.'</a></td>
+                    <td>'.$row->projectName.'</td>
+                    <td>'.$row->projectTypes.'</td>
+                    <td>'.$row->clientsName.'</td>
+                    <td>'.$row->brands.'</td>
                     <td></td>
                     <td>
-                        <a href="'.base_url('events/results/event/'.$row->jo_id).'" class="btn btn-success btn-rounded btn-ripple"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                        <a href="#" class="btn btn-warning btn-rounded btn-ripple editButtonEvent" alt="'.$row->jo_id.'" data-toggle="modal" data-target="#myModal"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                        <a href="#" class="btn btn-danger btn-rounded btn-ripple deleteButtonEvent" alt="'.$row->jo_id.'"><i class="fa fa-trash" aria-hidden="true"></i></i></a>
+                        <a href="'.base_url('events/results/'.$row->jobID).'" class="btn btn-success btn-rounded btn-ripple"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                        <a href="#" class="btn btn-warning btn-rounded btn-ripple editButtonEvent" alt="'.$row->jobID.'" data-toggle="modal" data-target="#myModal"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                        <a href="#" class="btn btn-danger btn-rounded btn-ripple deleteButtonEvent" alt="'.$row->jobID.'"><i class="fa fa-trash" aria-hidden="true"></i></i></a>
                     </td>
                 </tr>
             ';

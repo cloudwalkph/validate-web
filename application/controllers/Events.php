@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Jolist extends CI_Controller {
+class Events extends CI_Controller {
 
     /**
      * Index Page for this controller.
@@ -18,26 +18,13 @@ class Jolist extends CI_Controller {
      * map to /index.php/welcome/<method_name>
      * @see https://codeigniter.com/user_guide/general/urls.html
      */
-//    public function index()
-//    {
-//        $this->load->view('dashboard');
-//    }
-//
-//}
-public function __construct()
-    {
-        parent::__construct();
-        $this->load->model('Get', 'fetch');
-    }
-
-
     public function index()
     {
-        if(!$this->session->userdata('logged_in')){
-            redirect('login');
-        }else{
-            $data['results'] = $this->fetch->jolist();
-            $this->load->view('dashboard', $data);
-        }
+//        $this->load->view('login');
+    }
+
+    function results( $id ){
+//        echo $id;
+        $this->load->view('results');
     }
 }
