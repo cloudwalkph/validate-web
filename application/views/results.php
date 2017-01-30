@@ -4,10 +4,10 @@
 <div class="container-fluid">
     <div class="row text-center">
         <ul class="nav nav-pills text-center">
-            <li class="active col-md-6">
+            <li class="active col-md-5 col-md-offset-1">
                 <a href="#1a" data-toggle="tab">Overview</a>
             </li>
-            <li class="col-md-6">
+            <li class="col-md-5">
                 <a href="#2a" data-toggle="tab">Ratee's result</a>
             </li>
         </ul>
@@ -75,6 +75,80 @@
                     </div>
                 </div>
             </div>
+            <div class="tab-pane fade" id="eventproper">
+                <div class="row cpreevent" alt="x">
+                    <div class="col-md-12">
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <div class="panel-title"><h4>Event Proper</h4></div>
+                            </div><!--.panel-heading-->
+                            <div class="panel-body">
+                                <div class="c3-area-chart-event-proper c3-charts"></div>
+                            </div><!--.panel-body-->
+                        </div><!--.panel-->
+                    </div><!--.col-md-12-->
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="message-list-overlay"></div>
+                        <ul class="list-material message-list2">
+                            <?php
+                            $data['qtype'] = "eprop";
+                            $data['lmenu'] = array(
+                                '1' => 'Accounts',
+                                '2' => 'Operations',
+                                '6' => 'Setup',
+                                '8' => 'Production',
+                                '9' => 'Inventory',
+                                '10' => 'Human Resources'
+                            );
+                            $this->load->view('dmenu',$data);
+                            ?>
+                        </ul>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="message-send-container-2 row container-all" style="background: #fff;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="postevent">
+                <div class="row cpreevent" alt="x">
+                    <div class="col-md-12">
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <div class="panel-title"><h4>Post Event</h4></div>
+                            </div><!--.panel-heading-->
+                            <div class="panel-body">
+                                <div class="c3-area-chart-post-event c3-charts"></div>
+                            </div><!--.panel-body-->
+                        </div><!--.panel-->
+                    </div><!--.col-md-12-->
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="message-list-overlay"></div>
+                        <ul class="list-material message-list2">
+                            <?php
+                            $data['qtype'] = "post";
+                            $data['lmenu'] = array(
+                                '1' => 'Accounts',
+                                '2' => 'Operations',
+                                '6' => 'Setup',
+                                '8' => 'Production',
+                                '9' => 'Inventory',
+                                '10' => 'Human Resources'
+                            );
+                            $this->load->view('dmenu',$data);
+                            ?>
+                        </ul>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="message-send-container-3 row container-all" style="background: #fff;">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -125,9 +199,6 @@
                 value: ['accounts', 'accounting'],
             },
             type: 'bar',
-            onclick: function(e) {
-                alert("aws");
-            },
             labels: true
         },
         bar: {
