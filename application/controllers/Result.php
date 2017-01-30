@@ -22,4 +22,6 @@ class Result extends CI_Controller {
     {
         $this->load->view('result');
     }
+
+ 
 }

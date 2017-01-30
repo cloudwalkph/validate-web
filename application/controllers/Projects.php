@@ -18,9 +18,17 @@ class Projects extends CI_Controller {
      * map to /index.php/welcome/<method_name>
      * @see https://codeigniter.com/user_guide/general/urls.html
      */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('Get', 'fetch');
+    }
+
     public function index()
     {
-        $this->load->view('projects');
+        $data['Jonumber'] = $this->fetch->joDetails($this->input->get('jo'));
+        $this->load->view('projects', $data);
 //        echo $this->input->get('jo');
     }
+
 }

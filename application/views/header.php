@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>Evaluation - Dashboard</title>
+    <title>Validate - Dashboard</title>
 
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin1/css/jquery-ui.css">
     <!-- BEGIN CORE CSS -->
@@ -64,7 +64,7 @@
         <div class="starting-point">
             <span></span>
         </div><!--.starting-point-->
-        <div class="logo">EVALUATION</div><!--.logo-->
+        <div class="logo">Validate</div><!--.logo-->
     </div><!--.overlay-->
 
     <div class="overlay-secondary"></div><!--.overlay-secondary-->
@@ -73,11 +73,11 @@
     <div class="page-header full-content">
         <div class="row">
             <div class="col-sm-6">
-                <h1>Dashboard</h1>
+                <h1 style="margin-left: 541px;" >Validate</h1>
             </div><!--.col-->
             <div class="col-sm-6">
                 <ol class="breadcrumb">
-                    <li><a href="#" class="active"><i class="ion-home"></i> Homepage</a></li>
+                    <li><a href="<?=base_url('jolist ')?>" class="active"><i class="ion-home"></i> Homepage</a></li>
                 </ol>
             </div><!--.col-->
         </div><!--.row-->

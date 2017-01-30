@@ -1,25 +1,46 @@
 <?php $this->load->view('header'); ?>
+<?php
+$jo_number='';
+$project_name='';
+$date_created='';
+
+
+$details=json_decode($Jonumber);
+//print_r($details);
+foreach ($details as $row){
+    $jo_number=$row->jo_number;
+    $project_name=$row->project_name;
+    $date_created=$row->date_created;
+}
+?>
 <div class="container">
     <div class="row">
         <div class="col-sm-4">
-            <label id="lblJOID" style="width: 100% text-align: left;" >JO Numbers:</label>
+            <label id="lblJOID" style="width: 100% text-align: left;" >JO Numbers:<?=$jo_number?></label>
         </div>
         <div class="col-sm-4">
-            <label id="projectName" style="width: 100% text-align: left;">Project Name:</label>
+            <label id="projectName" style="width: 100% text-align: left;">Project Name:<?=$project_name?></label>
         </div>
         <div class="col-sm-4">
-            <label id="projectName" style="width: 100% text-align: left;">Date Created:</label>
+            <label id="projectName" style="width: 100% text-align: left;">Date Created:<?=$date_created?></label>
         </div>
     </div>
     <form id="test" method="post">
         <div class="row" style="margin-top: 15px;">
-            <div class="col-sm-3">
+            <div class="col-sm-2">
                 <label id="lblJOID" style="width: 100%">Acivation Date:</label>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-2">
+                <input type="date" class="fullwidth dateSelector" name="inp_ActivationsDate" id="inp_ActivationsDate">
+            </div>
+
+            <div class="col-sm-1">
                 <label id="projectName" style="width: 100%">End Date:</label>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-2">
+                <input type="date" class="fullwidth dateSelector" name="inp_ActivationsDate" id="inp_ActivationsDate">
+            </div>
+            <div class="col-sm-2">
                 <select class="btn-warning fullwidth" name="eventType" id="eventType">
                     <option value="" disabled selected>Select Event Type</option>
                     <option value="pre">Small Event</option>
@@ -27,7 +48,7 @@
                     <option value="post">Big Event</option>
                 </select>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-2">
                 <select class="btn-warning fullwidth" name="eventType" id="eventType">
                     <option value="" disabled selected>Select Event</option>
                     <option value="pre">Pre-Event</option>
@@ -124,7 +145,7 @@
                 </tbody>
             </table>
             <div class="button-group">
-                <a class="btn btn-primary" href="<?=base_url('summary')?>">View Summary</a>
+                <a class="btn btn-primary" href="<?=base_url('summary?s_event='.$this->input->get('jo'))?>">View Summary</a>
                 <a class="btn btn-success" style="margin-left: 825px;">Save</a>
                 <a class="btn btn-info">Done</a>
             </div>

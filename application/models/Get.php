@@ -55,4 +55,18 @@ class Get extends CI_Model {
         }
         return json_encode($results);
     }
+    
+    function joDetails($jonumber){
+        $this->db->select('jo_id, jo_number, project_name, date_created,');
+        $this->db->where('jo_id',$jonumber);
+        $query = $this->db->get('job_order_list')->result_array();
+        return json_encode($query);
+    }
+
+    function joSummary($josummary){
+        $this->db->select('jo_id, project_name, jo_number,');
+        $this->db->where('jo_id',$josummary);
+        $query = $this->db->get('job_order_list')->result_array();
+        return json_encode($query);
+    }
 }

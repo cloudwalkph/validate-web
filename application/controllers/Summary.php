@@ -18,8 +18,15 @@ class Summary extends CI_Controller {
      * map to /index.php/welcome/<method_name>
      * @see https://codeigniter.com/user_guide/general/urls.html
      */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('Get', 'fetch');
+    }
+
     public function index()
     {
-        $this->load->view('summary');
+        $data['Josummary'] = $this->fetch->joSummary($this->input->get('s_event'));
+        $this->load->view('summary', $data);
     }
 }
