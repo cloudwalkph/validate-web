@@ -73,7 +73,7 @@
     <div class="page-header full-content">
         <div class="row">
             <div class="col-sm-6">
-                <h1 style="margin-left: 541px;" >Validate</h1>
+                <h1 style="margin-left: 541px;" >VALIDATE</h1>
             </div><!--.col-->
             <div class="col-sm-6">
                 <ol class="breadcrumb">

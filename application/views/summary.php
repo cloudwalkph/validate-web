@@ -25,16 +25,45 @@ foreach ($summary as $row){
 <!--                <Button id="backbtn" type="button" class="btn btn-info" style="margin-left: 300px;">Back</Button>-->
             </div>
         </div>
-        <form id="test" method="post" class="text-center">
-            <div class="row " style="margin-top: 15px;">
-                <div class="col-sm-4">
-                    <label id="lblJOID" style="width: 100%">Pre-Event</label>
-                    <div class="col-sm-offset-2 col-sm-1" style="margin-top: 45px;">
-                        <label>Deadline</label>
-                    </div>
-<!--                    <div class="row">-->
 
-                        <table class="table table-bordered">
+<!--        //start form //-->
+        <form id="test" method="post" class="text-center">
+            <div class="row" style="margin-top: 15px;">
+                <div class="col-sm-4">
+                <label id="lblJOID" style="width: 100%">Pre-Event</label>
+                </div>
+                <div class="col-sm-4">
+                    <label id="lblJOID" style="width: 100%">Event Proper</label>
+                </div>
+                <div class="col-sm-4">
+                    <label id="lblJOID" style="width: 100%">Post Event</label>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top: 15px;">
+                <div class="col-sm-2">
+                    <label id="lblJOID" style="width: 100%">Deadline:</label>
+                </div>
+                <div class="col-sm-2">
+                    <input type="date" class="fullwidth dateSelector" name="inp_ActivationsDate" id="inp_ActivationsDate">
+                </div>
+                <div class="col-sm-2">
+                    <label id="lblJOID" style="width: 100%">Deadline:</label>
+                </div>
+                <div class="col-sm-2">
+                    <input type="date" class="fullwidth dateSelector" name="inp_ActivationsDate" id="inp_ActivationsDate">
+                </div>
+                <div class="col-sm-2">
+                    <label id="lblJOID" style="width: 100%">Deadline:</label>
+                </div>
+                <div class="col-sm-2">
+                    <input type="date" class="fullwidth dateSelector" name="inp_ActivationsDate" id="inp_ActivationsDate">
+                </div>
+            </div>
+
+            <div class="row" style="margin-top: 15px;">
+                <div class="col-sm-4">
+                    <table class="table table-bordered">
                             <thead>
                             <tr>
                                 <th>Rater</th>
@@ -53,41 +82,11 @@ foreach ($summary as $row){
                             </tbody>
                         </table>
                 </div>
-                <div class="col-sm-4">
-                    <label id="projectName" style="width: 100%">Event Proper</label>
-                    <div class="col-sm-offset-2 col-sm-1" style="margin-top: 45px;">
-                        <label>Deadline</label>
-                    </div>
-                    <!--                    <div class="row">-->
 
-                    <table class="table table-bordered">
-                        <thead>
-                        <tr>
-                            <th>Rater</th>
-                            <th>Ratee</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                        </tr>
-                        <tr>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
                 <div class="col-sm-4">
-                    <label id="projectName" style="width: 100%">Post Event</label>
-                    <div class="col-sm-offset-2 col-sm-1" style="margin-top: 45px;">
-                        <label>Deadline</label>
-                    </div>
-                    <!--                    <div class="row">-->
                     <table class="table table-bordered">
                         <thead>
-                        <tr >
+                        <tr>
                             <th>Rater</th>
                             <th>Ratee</th>
                         </tr>
@@ -104,8 +103,29 @@ foreach ($summary as $row){
                         </tbody>
                     </table>
                 </div>
+
+                <div class="col-sm-4">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Rater</th>
+                            <th>Ratee</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                        </tr>
+                        <tr>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </form>
+<!--        //end form//-->
     </div>
 <?php $this->load->view('footer'); ?>
